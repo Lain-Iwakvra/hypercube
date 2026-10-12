@@ -1,7 +1,9 @@
 # Hypercube
 
 Projection 2D d'un hypercube *n*-dimensionnel, avec coloration des arêtes par
-dimension. Projet **autonome** — il ne dépend pas du dépôt `lib`.
+dimension. L'animation est écrite en vidéo à l'aide de la bibliothèque
+partagée [`lib`](https://github.com/Lain-Iwakvra/lib) (`figure_to_bgr`,
+`njit`) — le projet dépend donc de `lib`, comme les autres de la collection.
 
 ## Ce que fait le script
 
@@ -25,8 +27,14 @@ dimension. Projet **autonome** — il ne dépend pas du dépôt `lib`.
 ## Installation
 
 ```bash
-pip install numpy matplotlib numba
+pip install numpy matplotlib numba opencv-python tqdm
 ```
+
+Sur Arch, les bindings Python d'OpenCV viennent de `python-opencv` (paquet
+`extra`) : `sudo pacman -S python-opencv`.
+
+Le dossier `lib` doit être voisin de ce projet (le script l'ajoute lui-même au
+chemin d'import, aucune variable d'environnement n'est nécessaire).
 
 ## Utilisation
 
@@ -34,9 +42,10 @@ pip install numpy matplotlib numba
 python hypercube.py
 ```
 
-Une fenêtre s'ouvre avec les deux projections côte à côte ; fermez-la pour
-quitter. Le temps de calcul est affiché dans le terminal (typiquement
-quelques millisecondes — les fonctions `@njit` sont mises en cache).
+Le script génère deux vidéos — `hypercube_norme1.mp4` et
+`hypercube_fibonacci.mp4` — puis affiche les deux projections côte à côte à
+leur état final ; fermez la fenêtre pour quitter. Les images sont écrites
+directement en MP4 (via OpenCV), sans fichier intermédiaire.
 
 ## Réglages
 
